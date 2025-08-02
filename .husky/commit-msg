@@ -1,0 +1,18 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx --no -- commitlint --edit "$1"
+
+if [ $? -ne 0 ]; then
+  echo
+  echo "❌ Commit message failed linting!"
+  echo "💡 Please use Conventional Commit format:"
+  echo
+  echo "Examples:"
+  echo "  feat: add new component"
+  echo "  fix(nav): resolve layout bug"
+  echo "  chore: update dependencies"
+  echo
+  echo "📘 See: https://www.conventionalcommits.org/en/v1.0.0/"
+  exit 1
+fi
