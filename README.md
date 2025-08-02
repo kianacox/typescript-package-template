@@ -2,6 +2,14 @@
 
 A modern TypeScript npm package template with dual CJS/ESM support, automated testing, linting, and semantic releases.
 
+> **⚠️ Important Setup Required**: This template uses [semantic-release](https://github.com/semantic-release/semantic-release) for automated versioning and publishing. Before using this template, you must:
+>
+> 1. **Grant repository permissions** to GitHub Actions (Settings → Actions → General → Workflow permissions)
+> 2. **Create a GitHub Personal Access Token** with `repo` scope
+> 3. **Add the token as `GH_TOKEN`** in your repository secrets
+>
+> See the [Publishing](#-publishing) section for detailed setup instructions.
+
 ## 🚀 Features
 
 - **Dual Format Support** - CommonJS and ES Modules
@@ -93,6 +101,23 @@ npm test
 
 ## 🔄 Automated Workflow
 
+### About Semantic-Release
+
+This template uses **semantic-release** for automated versioning and publishing. It:
+
+- **Analyzes commit messages** to determine version bumps
+- **Automatically publishes** to npm when you push to main
+- **Generates changelogs** and GitHub releases
+- **Requires specific permissions** to write to your repository
+
+### Required Setup
+
+Before using semantic-release, you need to:
+
+1. **Grant repository permissions** to GitHub Actions
+2. **Configure npm token** for publishing
+3. **Use conventional commit messages** (see below)
+
 ### Release Process
 
 1. **Commit with conventional message** (see below)
@@ -168,17 +193,25 @@ feat(api): BREAKING CHANGE: rename add to sum
 ### First Time Setup
 
 1. **Login to npm**: `npm login`
+
 2. **Create npm access token**:
    ```bash
    npm token create --read-only
    # Copy the generated token
    ```
 3. **Configure GitHub secrets**:
+
    - Go to your repository → Settings → Secrets and variables → Actions
    - Click "New repository secret"
    - Name: `NPM_TOKEN`
    - Value: Paste your npm access token
-4. **Push to main** - Triggers automatic release
+
+4. **Set up semantic-release permissions**:
+   - Go to your repository → Settings → Actions → General
+   - Scroll to "Workflow permissions"
+   - Select "Read and write permissions"
+   - Check "Allow GitHub Actions to create and approve pull requests"
+5. **Push to main** - Triggers automatic release
 
 ### Manual Publishing
 
